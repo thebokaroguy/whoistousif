@@ -35,7 +35,7 @@ export default function HeroOverlay() {
                             <h2 className="text-cyan-400 tracking-[0.3em] text-sm md:text-lg mb-4 font-mono">
                                 ENGINEERING FUTURE
                             </h2>
-                            <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-white mb-6 leading-[0.9]">
+                            <h1 className="text-2xl md:text-8xl font-black tracking-tighter text-white mb-6 leading-[0.9]">
                                 INTERACTIVE <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
                                     CAREER JOURNEY

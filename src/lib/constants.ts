@@ -53,7 +53,7 @@ export const CAREER_MILESTONES: CareerMilestone[] = [
         alignment: "left",
         assets: [
             { type: "image", path: "/assets/linefollowingrobotPIDfast.jpeg", label: "PID Line Follower" },
-            { type: "image", path: "/assets/gesture_sys.png", label: "Gesture System" },
+            { type: "image", path: "/assets/gesture_sys_v2.png", label: "Gesture System" },
             { type: "image", path: "/assets/techfest-win.png", label: "Techfest Winner" },
             { type: "image", path: "/assets/iit-bombay-profile.jpg", label: "IIT Bombay" }
         ]

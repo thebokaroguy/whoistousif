@@ -51,7 +51,7 @@ function ResponsiveStars() {
 
 export default function Scene() {
     return (
-        <div className="w-full h-screen absolute top-0 left-0 -z-10 bg-black touch-none">
+        <div className="w-full h-screen absolute top-0 left-0 -z-10 bg-black">
             <Canvas
                 gl={{
                     antialias: true,
