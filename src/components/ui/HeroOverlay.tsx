@@ -20,32 +20,21 @@ export default function HeroOverlay() {
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.5, duration: 1 }}
+                        className="text-center"
                     >
-                        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-500">
+                        <h1 className="text-5xl md:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-500 leading-none">
                             ENGINEERING<br />FUTURE
                         </h1>
                     </motion.div>
-                    {/* Title Section */}
-                    <div className="relative z-10 max-w-4xl w-full px-6 md:px-0 text-center md:text-left">
-                        <motion.div
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, ease: "easeOut" }}
-                        >
-                            <h2 className="text-cyan-400 tracking-[0.3em] text-sm md:text-lg mb-4 font-mono">
-                                ENGINEERING FUTURE
-                            </h2>
-                            <h1 className="text-2xl md:text-8xl font-black tracking-tighter text-white mb-6 leading-[0.9]">
-                                INTERACTIVE <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-                                    CAREER JOURNEY
-                                </span>
-                            </h1>
-                            <p className="text-gray-400 text-lg md:text-xl max-w-xl mx-auto md:mx-0 leading-relaxed font-light">
-                                Explore the evolution of a Robotics & AI Engineer through a cinematic 3D timeline.
-                            </p>
-                        </motion.div>
-                    </div>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1, duration: 1 }}
+                        className="mt-6 text-sm md:text-2xl text-cyan-500/80 tracking-[0.3em] md:tracking-[0.5em] uppercase font-mono text-center px-4"
+                    >
+                        Interactive Career Journey
+                    </motion.p>
 
                     {/* Scroll Indicator */}
                     <motion.div
