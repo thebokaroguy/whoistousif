@@ -4,12 +4,14 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, Stars, AdaptiveDpr } from "@react-three/drei";
 import { EffectComposer, Bloom, Noise, Vignette } from "@react-three/postprocessing";
 import { Suspense, useMemo } from "react";
-
+import { createTrackCurve } from "@/lib/curve"; // Import shared curve
 import Track from "./Track";
 import Robot from "./Robot";
 import CameraManager from "./CameraManager";
 import SkillGalaxy from "./SkillGalaxy";
 import ParticleField from "./ParticleField";
+import RepairZone from "./RepairZone";
+import SpaceTraffic from "./SpaceTraffic";
 
 // Responsive Post-Processing
 function ResponsiveEffects() {
@@ -70,6 +72,8 @@ export default function Scene() {
 
                     {/* Scene Elements */}
                     <Track />
+                    <RepairZone curve={useMemo(() => createTrackCurve(), [])} />
+                    <SpaceTraffic />
                     <Robot />
                     <SkillGalaxy />
                     <ParticleField />
