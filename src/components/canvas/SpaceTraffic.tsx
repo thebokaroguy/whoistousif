@@ -36,14 +36,14 @@ export default function SpaceTraffic() {
     return (
         <group>
             {/* Spaceship: Medium distance */}
-            <SingleShip path={MODEL_PATHS.spaceship} offset={0} scale={2} radius={200} />
+            <SingleShip path={MODEL_PATHS.spaceship} offset={0} scale={0.2} radius={200} />
 
             {/* X-Wing: Faster, closer */}
-            <SingleShip path={MODEL_PATHS.xwing} offset={2} scale={1.5} radius={180} />
+            <SingleShip path={MODEL_PATHS.xwing} offset={2} scale={0.15} radius={180} />
 
             {/* Giant Robot: Needs to be HUGE but far away, or smaller if it's just a prop */}
             {/* User reported "weird thing", likely this one scaling too big. Reducing scale significantly. */}
-            <SingleShip path={MODEL_PATHS.giantRobot} offset={4} scale={0.5} radius={250} />
+            <SingleShip path={MODEL_PATHS.giantRobot} offset={4} scale={0.05} radius={250} />
         </group>
     );
 }
