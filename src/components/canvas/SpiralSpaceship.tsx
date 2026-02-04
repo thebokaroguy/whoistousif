@@ -37,7 +37,8 @@ export default function SpiralSpaceship() {
         const binormal = new THREE.Vector3().crossVectors(tangent, normal).normalize();
 
         // 2. Calculate Spiral Offset
-        const angle = t * Math.PI * 2 * FREQUENCY;
+        // Negate angle to reverse direction (opposite to current)
+        const angle = -t * Math.PI * 2 * FREQUENCY;
         const spiralOffset = new THREE.Vector3()
             .addScaledVector(normal, Math.cos(angle) * SPIRAL_RADIUS)
             .addScaledVector(binormal, Math.sin(angle) * SPIRAL_RADIUS);
@@ -50,7 +51,9 @@ export default function SpiralSpaceship() {
         const tangentNext = curve.getTangentAt(tNext).normalize();
         const normalNext = new THREE.Vector3(0, 1, 0).cross(tangentNext).normalize();
         const binormalNext = new THREE.Vector3().crossVectors(tangentNext, normalNext).normalize();
-        const angleNext = tNext * Math.PI * 2 * FREQUENCY;
+
+        // Reverse angle for next point too
+        const angleNext = -tNext * Math.PI * 2 * FREQUENCY;
         const offsetNext = new THREE.Vector3()
             .addScaledVector(normalNext, Math.cos(angleNext) * SPIRAL_RADIUS)
             .addScaledVector(binormalNext, Math.sin(angleNext) * SPIRAL_RADIUS);

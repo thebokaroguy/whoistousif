@@ -28,7 +28,7 @@ export const ASSET_SCALES: Record<keyof typeof MODEL_PATHS, number> = {
     robot: 0.8,          // Slightly smaller than human
     grabbot: 0.08,       // Native ~30m, target ~2.4m
     giantRobot: 0.005,   // Native ~500m, target ~2.5m (Reduced 10x again)
-    spaceship: 0.02,     // Native ~25m, target ~0.5m (Reduced 7x again)
+    spaceship: 0.01,     // Native ~25m, target ~0.25m (Halved again)
     xwing: 0.02,         // Native ~50m, target ~1m
     drill: 0.015,        // Native ~20m, target ~0.3m (handheld)
     saw: 0.015,
