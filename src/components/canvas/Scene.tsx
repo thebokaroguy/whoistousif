@@ -12,6 +12,7 @@ import SkillGalaxy from "./SkillGalaxy";
 import ParticleField from "./ParticleField";
 import RepairZone from "./RepairZone";
 import SpaceTraffic from "./SpaceTraffic";
+import SpiralSpaceship from "./SpiralSpaceship";
 
 // Responsive Post-Processing
 function ResponsiveEffects() {
@@ -74,6 +75,7 @@ export default function Scene() {
                     <Track />
                     <RepairZone curve={useMemo(() => createTrackCurve(), [])} />
                     <SpaceTraffic />
+                    <SpiralSpaceship />
                     <Robot />
                     <SkillGalaxy />
                     <ParticleField />
