@@ -4,9 +4,9 @@ import { useFrame } from "@react-three/fiber";
 import { useGLTF, Trail } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
-import { useStore } from "@/lib/store"; // Uses the shared scroll progress
+import { useStore } from "@/lib/store";
 import { createTrackCurve } from "@/lib/curve";
-import { MODEL_PATHS } from "./assets/AssetConfig";
+import { MODEL_PATHS, ASSET_SCALES } from "./assets/AssetConfig";
 import EngineFlame from "./EngineFlame";
 
 export default function SpiralSpaceship() {
@@ -87,7 +87,7 @@ export default function SpiralSpaceship() {
                 attenuation={(t) => t * t}
             >
                 <group ref={shipRef}>
-                    <primitive object={scene} scale={0.2} rotation={[0, Math.PI, 0]} />
+                    <primitive object={scene} scale={ASSET_SCALES.spaceship} rotation={[0, Math.PI, 0]} />
 
                     {/* Engine Viz */}
                     <EngineFlame position={[0, 0, -0.3]} /> {/* Adjusted for 0.2 scale */}

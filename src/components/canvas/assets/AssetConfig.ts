@@ -18,6 +18,27 @@ export const MODEL_PATHS = {
     wrench: "/models/wrench.glb",
 };
 
+/**
+ * Centralized Scale Registry
+ * All GLB files have inconsistent native scales (exported in cm/inches).
+ * These values normalize them to a consistent 1 unit = 1 meter world scale.
+ */
+export const ASSET_SCALES: Record<keyof typeof MODEL_PATHS, number> = {
+    astronaut: 1.0,      // Native ~1.8m, target 1.8m (human scale)
+    robot: 0.8,          // Slightly smaller than human
+    grabbot: 0.08,       // Native ~30m, target ~2.4m
+    giantRobot: 0.03,    // Native ~500m, target ~15m (deep background only)
+    spaceship: 0.15,     // Native ~25m, target ~3.75m (spiral hero)
+    xwing: 0.06,         // Native ~50m, target ~3m (traffic)
+    drill: 0.015,        // Native ~20m, target ~0.3m (handheld)
+    saw: 0.015,
+    gear: 0.015,
+    ladder: 0.02,        // Native ~15m, target ~0.3m
+    forklift: 0.08,      // Native ~40m, target ~3.2m
+    bulldozer: 0.08,     // Removed from scene but kept for reference
+    wrench: 0.015,
+};
+
 // Preload all models to prevent stutter
 Object.values(MODEL_PATHS).forEach((path) => {
     useGLTF.preload(path);

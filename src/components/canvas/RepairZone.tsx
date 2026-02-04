@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import Astronaut from "./Astronaut";
-import { MODEL_PATHS } from "./assets/AssetConfig";
+import { MODEL_PATHS, ASSET_SCALES } from "./assets/AssetConfig";
 import { Instances, Instance, useGLTF } from "@react-three/drei";
 
 interface RepairZoneProps {
@@ -14,58 +14,61 @@ interface RepairZoneProps {
 export default function RepairZone({ curve }: RepairZoneProps) {
     // Generate repair spots along the curve
     const repairSpots = useMemo(() => {
-        const spots = [];
-        const count = 15; // Number of repair crews
+        const spots: { position: THREE.Vector3; rotation: THREE.Euler; type: string; scale: number }[] = [];
+        const count = 8; // Reduced from 15 for cleaner scene
 
         for (let i = 0; i < count; i++) {
-            // Pick a random point on the curve (avoiding start/end extremes)
             const t = 0.1 + (Math.random() * 0.8);
             const position = curve.getPointAt(t);
-            const tangent = curve.getTangentAt(t);
 
-            // Offset from track slightly
             const offset = new THREE.Vector3(
-                (Math.random() - 0.5) * 4,
+                (Math.random() - 0.5) * 6,
                 (Math.random() - 0.5) * 4,
                 0
             );
             position.add(offset);
 
-            // Rotation to face track or random
             const rotation = new THREE.Euler(
                 Math.random() * Math.PI,
                 Math.random() * Math.PI,
                 0
             );
 
-            // Weighted random selection for asset type
             const rand = Math.random();
             let type = 'astronaut';
-            if (rand > 0.6) type = 'robot'; // 20%
-            if (rand > 0.8) type = 'grabbot'; // 10%
+            if (rand > 0.6) type = 'robot';
+            if (rand > 0.85) type = 'grabbot';
 
-            // Occasionally add heavy machinery (Just Forklift now, Bulldozer removed)
-            if (Math.random() > 0.9) {
+            // Heavy machinery (5% chance, pushed far out)
+            if (Math.random() > 0.95) {
                 spots.push({
-                    // Push further out (6 units) to avoid camera clipping
-                    position: position.clone().add(new THREE.Vector3(0, -6, 0)),
+                    position: position.clone().add(new THREE.Vector3(0, -10, 0)),
                     rotation,
-                    type: 'forklift', // Bulldozer removed as per request
-                    scale: 0.2 // Reduced from 2.0 to 0.2
+                    type: 'forklift',
+                    scale: ASSET_SCALES.forklift
                 });
             }
 
-            // Occasionally add floating tools (Gear/Ladder/Drill)
-            if (Math.random() > 0.8) {
+            // Floating tools (5% chance)
+            if (Math.random() > 0.95) {
                 spots.push({
-                    position: position.clone().add(new THREE.Vector3((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4)), // Wider spread
+                    position: position.clone().add(new THREE.Vector3(
+                        (Math.random() - 0.5) * 6,
+                        (Math.random() - 0.5) * 4,
+                        (Math.random() - 0.5) * 4
+                    )),
                     rotation: new THREE.Euler(Math.random(), Math.random(), Math.random()),
                     type: 'tool',
-                    scale: 0.05 // Reduced from 0.5 to 0.05
+                    scale: ASSET_SCALES.drill // All tools use similar scale
                 });
             }
 
-            spots.push({ position, rotation, type, scale: type === 'grabbot' ? 0.1 : 1 }); // Grabbot scale 0.1
+            spots.push({
+                position,
+                rotation,
+                type,
+                scale: type === 'grabbot' ? ASSET_SCALES.grabbot : ASSET_SCALES.astronaut
+            });
         }
         return spots;
     }, [curve]);
