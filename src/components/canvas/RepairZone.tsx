@@ -44,27 +44,28 @@ export default function RepairZone({ curve }: RepairZoneProps) {
             if (rand > 0.6) type = 'robot'; // 20%
             if (rand > 0.8) type = 'grabbot'; // 10%
 
-            // Occasionally add heavy machinery (Bulldozer/Forklift)
+            // Occasionally add heavy machinery (Just Forklift now, Bulldozer removed)
             if (Math.random() > 0.9) {
                 spots.push({
-                    position: position.clone().add(new THREE.Vector3(0, -3, 0)),
+                    // Push further out (6 units) to avoid camera clipping
+                    position: position.clone().add(new THREE.Vector3(0, -6, 0)),
                     rotation,
-                    type: Math.random() > 0.5 ? 'bulldozer' : 'forklift',
-                    scale: 2
+                    type: 'forklift', // Bulldozer removed as per request
+                    scale: 0.2 // Reduced from 2.0 to 0.2
                 });
             }
 
             // Occasionally add floating tools (Gear/Ladder/Drill)
             if (Math.random() > 0.8) {
                 spots.push({
-                    position: position.clone().add(new THREE.Vector3((Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2)),
+                    position: position.clone().add(new THREE.Vector3((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4)), // Wider spread
                     rotation: new THREE.Euler(Math.random(), Math.random(), Math.random()),
                     type: 'tool',
-                    scale: 0.5
+                    scale: 0.05 // Reduced from 0.5 to 0.05
                 });
             }
 
-            spots.push({ position, rotation, type, scale: 1 });
+            spots.push({ position, rotation, type, scale: type === 'grabbot' ? 0.1 : 1 }); // Grabbot scale 0.1
         }
         return spots;
     }, [curve]);
@@ -94,14 +95,14 @@ export default function RepairZone({ curve }: RepairZoneProps) {
                             object={useGLTF(MODEL_PATHS.grabbot).scene.clone()}
                             position={[spot.position.x, spot.position.y, spot.position.z]}
                             rotation={[spot.rotation.x, spot.rotation.y, spot.rotation.z]}
-                            scale={1}
+                            scale={spot.scale}
                         />
                     )}
-                    {(spot.type === 'bulldozer' || spot.type === 'forklift') && (
+                    {spot.type === 'forklift' && (
                         <primitive
-                            object={useGLTF(spot.type === 'bulldozer' ? MODEL_PATHS.bulldozer : MODEL_PATHS.forklift).scene.clone()}
+                            object={useGLTF(MODEL_PATHS.forklift).scene.clone()}
                             position={[spot.position.x, spot.position.y, spot.position.z]}
-                            rotation={[spot.rotation.x + 0.5, spot.rotation.y, spot.rotation.z]}
+                            rotation={[0, spot.rotation.y + Math.PI / 2, 0]}
                             scale={spot.scale}
                         />
                     )}
@@ -113,7 +114,7 @@ export default function RepairZone({ curve }: RepairZoneProps) {
                             ).scene.clone()}
                             position={[spot.position.x, spot.position.y, spot.position.z]}
                             rotation={[spot.rotation.x, spot.rotation.y, spot.rotation.z]}
-                            scale={0.5}
+                            scale={spot.scale}
                         />
                     )}
                 </group>
