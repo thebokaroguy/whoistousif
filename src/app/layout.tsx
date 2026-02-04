@@ -24,6 +24,14 @@ export const metadata: Metadata = {
   },
 };
 
+import { Rajdhani } from "next/font/google"; // Import font
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rajdhani",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className={`${rajdhani.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
