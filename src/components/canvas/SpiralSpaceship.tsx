@@ -90,7 +90,7 @@ export default function SpiralSpaceship() {
                 attenuation={(t) => t * t}
             >
                 <group ref={shipRef}>
-                    <primitive object={scene} scale={ASSET_SCALES.spaceship} rotation={[0, Math.PI, 0]} />
+                    <primitive object={scene} scale={ASSET_SCALES.spaceship} rotation={[0, 0, 0]} />
 
                     {/* Engine Viz */}
                     <EngineFlame position={[0, 0, -0.3]} /> {/* Adjusted for 0.2 scale */}
